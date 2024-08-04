@@ -1,0 +1,5 @@
+*.exe
+**/[a-zA-Z]
+waste
+**/speed
+*/*.exe

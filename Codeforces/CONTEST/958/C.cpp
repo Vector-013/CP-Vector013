@@ -8,7 +8,6 @@
 #include <numeric>
 #include <map>
 #include <queue>
-#include <stack>
 #define pb push_back
 #define pop pop_back
 using namespace std;
@@ -21,30 +20,31 @@ const ll linf = 9e18;
 
 void solve()
 {
-    int n, m;
-    string name = "vika";
-    int ptr = 0;
-    cin >> n >> m;
-    vector<string> v(n);
-    for (int i = 0; i < n; i++)
-        cin >> v[i];
-    for (int j = 0; j < m; j++)
+    ll n;
+    cin >> n;
+    vector<ll> v;
+    v.push_back(n);
+    ll k = 1;
+    ll cnt = 0;
+    while (cnt <= 64)
     {
-        for (int i = 0; i < n; i++)
+        if (n & k)
         {
-            if (v[i][j] == name[ptr])
+            if (!(n & (~k)))
             {
-                ptr++;
-                break;
+                cout << 1 << '\n'
+                     << n << '\n';
+                return;
             }
+            v.push_back((n & (~k)));
         }
-        if (ptr == 4)
-        {
-            cout << "YES" << '\n';
-            return;
-        }
+        k = k << 1;
+        cnt++;
     }
-    cout << "NO" << '\n';
+    cout << v.size() << '\n';
+    for (ll i = v.size() - 1; i >= 0; i--)
+        cout << v[i] << " ";
+    cout << '\n';
 }
 int main()
 {
