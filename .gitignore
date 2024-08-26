@@ -3,3 +3,4 @@
 waste
 **/speed
 */*.exe
+**/*/[a-z][A-Z]
