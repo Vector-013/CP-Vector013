@@ -18,7 +18,28 @@ const ll linf = 9e18;
 
 void solve()
 {
+    string s;
+    cin >> s;
+    int n = s.size();
+    for (int i = 1; i < n; i++)
+    {
+        if (s[i] == s[i - 1])
+        {
+            cout << s[i] << s[i] << '\n';
+            return;
+        }
+    }
+    for (int i = 2; i < n; i++)
+    {
+        if (s[i] != s[i - 1] && s[i - 1] != s[i - 2] && s[i] != s[i - 2])
+        {
+            cout << s[i - 2] << s[i - 1] << s[i] << '\n';
+            return;
+        }
+    }
+    cout << -1 << '\n';
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -26,5 +47,7 @@ int main()
     int t;
     cin >> t;
     while (t--)
+    {
         solve();
+    }
 }

@@ -18,6 +18,22 @@ const ll linf = 9e18;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    if (n == 1 || n == 3)
+    {
+        cout << -1 << '\n';
+        return;
+    }
+    if (n % 2 == 0)
+    {
+        cout << string(n - 2, '3') << "66\n";
+        return;
+    }
+    else
+    {
+        cout << string(n - 4, '3') << "6366\n";
+    }
 }
 int main()
 {

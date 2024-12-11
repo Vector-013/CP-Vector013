@@ -8,6 +8,8 @@
 #include <numeric>
 #include <map>
 #include <queue>
+#define pb push_back
+#define pop pop_back
 using namespace std;
 typedef long long ll;
 using i64 = long long;
@@ -15,9 +17,20 @@ typedef unsigned long long ull;
 typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
-
+ll max(ll a, ll b)
+{
+    if (a >= b)
+        return a;
+    else
+        return b;
+}
 void solve()
 {
+    ll k;
+    cin >> k;
+    ld q = (ld)k;
+    ld z = q + floor(0.5 + sqrtl(q));
+    cout << (ll)z << '\n';
 }
 int main()
 {

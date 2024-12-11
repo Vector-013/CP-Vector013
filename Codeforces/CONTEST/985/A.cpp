@@ -18,7 +18,11 @@ const ll linf = 9e18;
 
 void solve()
 {
+    int l, r, k;
+    cin >> l >> r >> k;
+    cout << max(0, (r / k - l + 1)) << '\n';
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);

@@ -1,13 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <set>
-#include <cmath>
-#include <cstdlib>
-#include <string>
-#include <numeric>
-#include <map>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 using i64 = long long;

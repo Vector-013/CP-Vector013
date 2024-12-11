@@ -15,9 +15,21 @@ typedef unsigned long long ull;
 typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
-
+ll max(ll a, ll b)
+{
+    if (a >= b)
+        return a;
+    else
+        return b;
+}
 void solve()
 {
+    int n;
+    cin >> n;
+    if (n & 1)
+        cout << "Kosuke\n";
+    else
+        cout << "Sakurako\n";
 }
 int main()
 {

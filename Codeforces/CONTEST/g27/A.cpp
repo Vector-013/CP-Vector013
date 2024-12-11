@@ -18,6 +18,12 @@ const ll linf = 9e18;
 
 void solve()
 {
+    ll n, m, r, c;
+    cin >> n >> m >> r >> c;
+    ll q = n - r;
+    ll w = m - c;
+    ll ans = q * m + w + (m - 1) * q;
+    cout << ans << '\n';
 }
 int main()
 {

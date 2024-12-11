@@ -1,13 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <set>
-#include <cmath>
-#include <cstdlib>
-#include <string>
-#include <numeric>
-#include <map>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 using i64 = long long;
@@ -18,6 +9,19 @@ const ll linf = 9e18;
 
 void solve()
 {
+    int n, m;
+    cin >> n >> m;
+    string s;
+    cin >> s;
+    map<char, int> mp;
+    for (int i = 0; i < n; i++)
+        mp[s[i]]++;
+    ll ans = 0;
+    for (char c = 'A'; c <= 'G'; c++)
+    {
+        ans += (m - mp[c]) * (m > mp[c]);
+    }
+    cout << ans << '\n';
 }
 int main()
 {

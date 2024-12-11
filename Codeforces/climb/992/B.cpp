@@ -1,13 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <set>
-#include <cmath>
-#include <cstdlib>
-#include <string>
-#include <numeric>
-#include <map>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 using i64 = long long;
@@ -18,6 +9,15 @@ const ll linf = 9e18;
 
 void solve()
 {
+    ll n;
+    cin >> n;
+    ll i = 1, ans = 1;
+    while (i < n)
+    {
+        i = (i + 1) << 1;
+        ans++;
+    }
+    cout << ans << '\n';
 }
 int main()
 {

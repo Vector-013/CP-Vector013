@@ -18,7 +18,24 @@ const ll linf = 9e18;
 
 void solve()
 {
+    ll x, m;
+    cin >> x >> m;
+    ll ans = 0;
+    ll n = 1;
+    while (n <= x)
+    {
+        n <<= 1;
+    }
+    ll q = min(n, m + 1);
+    for (int i = 1; i < q; i++)
+    {
+        ll z = x ^ i;
+        if ((z != 0) && ((x % z == 0) || (i % z == 0)))
+            ans++;
+    }
+    cout << ans << '\n';
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -26,5 +43,7 @@ int main()
     int t;
     cin >> t;
     while (t--)
+    {
         solve();
+    }
 }

@@ -1,13 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <set>
-#include <cmath>
-#include <cstdlib>
-#include <string>
-#include <numeric>
-#include <map>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 using i64 = long long;
@@ -18,6 +9,19 @@ const ll linf = 9e18;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++)
+        cin >> a[i];
+    sort(a.begin(), a.end());
+    ll ans = 0;
+    ans = a[0];
+    for (int i = 1; i < n; i++)
+    {
+        ans = (ans + a[i]) / 2;
+    }
+    cout << ans << '\n';
 }
 int main()
 {

@@ -1,0 +1,1 @@
+cout << dp[n][0] << endl;

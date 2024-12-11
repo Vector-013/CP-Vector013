@@ -8,6 +8,8 @@
 #include <numeric>
 #include <map>
 #include <queue>
+#define pb push_back
+#define pop pop_back
 using namespace std;
 typedef long long ll;
 using i64 = long long;
@@ -18,6 +20,31 @@ const ll linf = 9e18;
 
 void solve()
 {
+    int a, b;
+    cin >> a >> b;
+    if ((a % 2 == 0) && (b % 2 == 0))
+    {
+        cout << "yes\n";
+        return;
+    }
+    else if ((a % 2 == 1))
+    {
+        cout << "no\n";
+        return;
+    }
+    else
+    {
+        if (a != 0)
+        {
+            cout << "yes\n";
+            return;
+        }
+        else
+        {
+            cout << "no\n";
+            return;
+        }
+    }
 }
 int main()
 {

@@ -1,13 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <set>
-#include <cmath>
-#include <cstdlib>
-#include <string>
-#include <numeric>
-#include <map>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 using i64 = long long;
@@ -18,6 +9,20 @@ const ll linf = 9e18;
 
 void solve()
 {
+    ll x, y, k;
+    cin >> x >> y >> k;
+
+    while (k > 0 && x != 1)
+    {
+        ll cur = (x / y + 1) * y - x;
+        cur = max(1ll, cur);
+        cur = min(cur, k);
+        x += cur;
+        while (x % y == 0)
+            x /= y;
+        k -= cur;
+    }
+    cout << x + k % (y - 1) << '\n';
 }
 int main()
 {

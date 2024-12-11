@@ -18,7 +18,12 @@ const ll linf = 9e18;
 
 void solve()
 {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+        cout << 2 * i - 1 << ' ';
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -26,5 +31,8 @@ int main()
     int t;
     cin >> t;
     while (t--)
+    {
         solve();
+        cout << '\n';
+    }
 }

@@ -8,6 +8,8 @@
 #include <numeric>
 #include <map>
 #include <queue>
+#define pb push_back
+#define pop pop_back
 using namespace std;
 typedef long long ll;
 using i64 = long long;
