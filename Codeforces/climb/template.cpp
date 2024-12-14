@@ -6,6 +6,7 @@ typedef unsigned long long ull;
 typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
+const int mod = 1e9 + 7;
 
 void solve()
 {
