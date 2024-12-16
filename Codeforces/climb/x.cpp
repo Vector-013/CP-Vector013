@@ -2,69 +2,64 @@
 
 using i64 = long long;
 
-constexpr i64 inf = 1E18;
+void solve()
+{
+    int n;
+    std::cin >> n;
+
+    std::vector<std::vector<int>> adj(n);
+    for (int i = 1; i < n; i++)
+    {
+        int p;
+        std::cin >> p;
+        p--;
+        adj[p].push_back(i);
+    }
+
+    std::vector<int> l(n), r(n);
+    for (int i = 0; i < n; i++)
+    {
+        std::cin >> l[i] >> r[i];
+    }
+
+    int ans = 0;
+    std::function<int(int)> dfs = [&](int u) -> int
+    {
+        i64 s = 0;
+        for (auto v : adj[u])
+        {
+            s += dfs(v);
+        }
+        int res;
+        if (s >= l[u])
+        {
+            res = std::min<i64>(s, r[u]);
+        }
+        else
+        {
+            res = r[u];
+            ans++;
+        }
+
+        return res;
+    };
+    dfs(0);
+
+    std::cout << ans << "\n";
+}
 
 int main()
 {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
 
-    int n, m, k;
-    std::cin >> n >> m >> k;
+    int t;
+    std::cin >> t;
 
-    std::vector<int> c(n);
-    for (int i = 0; i < n; i++)
+    while (t--)
     {
-        std::cin >> c[i];
-        c[i]--;
+        solve();
     }
-
-    std::vector p(n, std::vector<i64>(m));
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < m; j++)
-        {
-            std::cin >> p[i][j];
-        }
-        if (c[i] != -1)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                p[i][j] = inf;
-            }
-            p[i][c[i]] = 0;
-        }
-    }
-
-    std::vector dp(k, std::vector(m, inf));
-    dp[0] = p[0];
-
-    for (int i = 1; i < n; i++)
-    {
-        std::vector newdp(k, std::vector(m, inf));
-        for (int j = 0; j < k; j++)
-        {
-            for (int x = 0; x < m; x++)
-            {
-                for (int y = 0; y < m; y++)
-                {
-                    int nj = j + (x != y);
-                    if (nj < k)
-                    {
-                        newdp[nj][y] = std::min(newdp[nj][y], dp[j][x] + p[i][y]);
-                    }
-                }
-            }
-        }
-        std::swap(dp, newdp);
-    }
-
-    auto ans = *std::min_element(dp[k - 1].begin(), dp[k - 1].end());
-    if (ans == inf)
-    {
-        ans = -1;
-    }
-    std::cout << ans << "\n";
 
     return 0;
 }
