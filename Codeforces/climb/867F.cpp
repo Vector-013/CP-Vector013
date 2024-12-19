@@ -43,6 +43,11 @@ void solve()
         }
     };
     dfs1(dfs1, 0, -1);
+    for (int i = 0; i < n; ++i)
+    {
+        cout << deep[i] << " ";
+    }
+    cout << '\n';
     vector<int> depest(n, 0);
     auto dfs2 = [&](auto self, int u, int p) -> void
     {
@@ -78,6 +83,11 @@ void solve()
     };
     depest[0] = deep[0];
     dfs2(dfs2, 0, -1);
+    for (int i = 0; i < n; ++i)
+    {
+        cout << depest[i] << " ";
+    }
+    cout << '\n';
     ll ans = -linf;
     for (int i = 0; i < n; i++)
         ans = max(ans, -1LL * d[i] * c + 1LL * k * depest[i]);
