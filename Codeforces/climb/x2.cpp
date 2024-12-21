@@ -1,73 +1,61 @@
-#include <iostream>
-#include <vector>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
+int mex(set<int> s)
+{
+    int res = 0;
+    while (s.count(res))
+        res++;
+    return res;
+};
+void solve()
+{
+    int n, x, y;
+    cin >> n >> x >> y;
+    x--;
+    y--;
+    vector<int> ans(n);
+    vector<set<int>> frnd(n);
+    frnd[x].insert(y);
+    frnd[y].insert(x);
+    frnd[0].insert(n - 1);
+    frnd[n - 1].insert(0);
+    for (int i = 0; i < n; i++)
+    {
+        if (i < n - 1)
+            frnd[i].insert(i + 1);
+        if (i > 0)
+            frnd[i].insert(i - 1);
+    }
+    set<int> s;
+    for (int i = 0; i < n; i++)
+    {
+        s.clear();
+        for (auto it : frnd[i])
+        {
+            if (ans[it] == -1)
+                continue;
+            s.insert(ans[it]);
+        }
+        ans[i] = mex(s);
+    }
+    for (int i = 0; i < n; i++)
+    {
+        cout << ans[i] << ' ';
+    }
+    cout << '\n';
+}
 
 int main()
 {
-    int n = 6; // Number of nodes
-    vector<vector<int>> edges = {
-        {5, 2}, {5, 0}, {4, 0}, {4, 1}, {2, 3}, {3, 1}};
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
 
-    auto checkIfDAG = [&](int n, vector<vector<int>> &edges)
+    int t;
+    cin >> t;
+
+    while (t--)
     {
-        vector<vector<int>> dag(n); // Adjacency list representation
-        for (const auto &edge : edges)
-        {
-            dag[edge[0]].push_back(edge[1]);
-        }
-
-        vector<bool> vis(n, false);
-        vector<bool> recStack(n, false);
-        stack<int> topoStack;
-
-        auto dfs = [&](auto &self, int node) -> bool
-        {
-            vis[node] = true;
-            recStack[node] = true;
-
-            for (int neighbor : dag[node])
-            {
-                if (!vis[neighbor])
-                {
-                    if (self(self, neighbor))
-                    {
-                        return true; // Cycle detected
-                    }
-                }
-                else if (recStack[neighbor])
-                {
-                    return true; // Back edge detected, cycle exists
-                }
-            }
-
-            recStack[node] = false;
-            topoStack.push(node); // Push the node onto the stack after visiting all neighbors
-            return false;
-        };
-
-        for (int i = 0; i < n; ++i)
-        {
-            if (!vis[i])
-            {
-                if (dfs(dfs, i))
-                {
-                    cout << "The graph is not a DAG." << endl;
-                    return;
-                }
-            }
-        }
-
-        // If no cycle is detected, print the topological order
-        cout << "The graph is a DAG. Topological Order: ";
-        while (!topoStack.empty())
-        {
-            cout << topoStack.top() << " ";
-            topoStack.pop();
-        }
-        cout << endl;
-    };
-
-    checkIfDAG(n, edges);
-    return 0;
+        solve();
+    }
 }

@@ -7,16 +7,23 @@ typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
 const int mod = 1e9 + 7;
-auto mex = [](set<int> &s) -> int
-{
-    int mex = 0;
-    while (s.count(mex))
-        mex++;
-    return mex;
-};
 
 void solve()
 {
+    int n, a, b;
+    cin >> n >> a >> b;
+    int ans = inf;
+    for (int i = 0; i <= 100; i += a)
+    {
+        for (int j = 0; j <= 50; j += b)
+        {
+            if ((((i / a) + (2 * (j / b)) == n)))
+            {
+                ans = min(ans, i + j);
+            }
+        }
+    }
+    cout << ans << '\n';
 }
 
 int main()

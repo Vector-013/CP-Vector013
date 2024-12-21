@@ -7,16 +7,26 @@ typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
 const int mod = 1e9 + 7;
-auto mex = [](set<int> &s) -> int
-{
-    int mex = 0;
-    while (s.count(mex))
-        mex++;
-    return mex;
-};
 
 void solve()
 {
+    ll x;
+    cin >> x;
+    if (x % 33 == 0)
+    {
+        cout << "YES\n";
+        return;
+    }
+    else
+    {
+        cout << "NO\n";
+        return;
+    }
+    string s = to_string(x);
+    if (x % 11)
+    {
+        cout << "NO\n";
+    }
 }
 
 int main()
