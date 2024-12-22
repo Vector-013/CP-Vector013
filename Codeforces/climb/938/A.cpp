@@ -12,17 +12,9 @@ void solve()
 {
     int n, a, b;
     cin >> n >> a >> b;
-    int ans = inf;
-    for (int i = 0; i <= 100; i += a)
-    {
-        for (int j = 0; j <= 50; j += b)
-        {
-            if ((((i / a) + (2 * (j / b)) == n)))
-            {
-                ans = min(ans, i + j);
-            }
-        }
-    }
+    int ans = n * a;
+    if (b < 2 * a)
+        ans = (n / 2) * b + (n % 2) * a;
     cout << ans << '\n';
 }
 

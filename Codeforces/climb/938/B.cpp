@@ -10,6 +10,21 @@ const int mod = 1e9 + 7;
 
 void solve()
 {
+    int n, a, c, d;
+    cin >> n >> c >> d;
+    vector<int> v(n);
+    vector<int> w, z(n * n);
+    for (int i = 0; i < n * n; i++)
+        cin >> z[i];
+    sort(z.begin(), z.end());
+    v[0] = z[0];
+    for (int i = 1; i < n; i++)
+        v[i] = v[i - 1] + c;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            w.push_back(v[i] + j * d);
+    sort(w.begin(), w.end());
+    cout << (w == z ? "Yes" : "No") << '\n';
 }
 
 int main()

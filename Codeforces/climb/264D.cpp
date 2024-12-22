@@ -1,22 +1,19 @@
-//              +-- -- --++-- +-In the name of ALLAH-+ --++-- -- --+              \\
-
 #include <bits/stdc++.h>
-
 using namespace std;
+typedef long long ll;
+using i64 = long long;
+typedef unsigned long long ull;
+typedef long double ld;
+const int inf = 2e9;
+const ll linf = 9e18;
+const int mod = 1e9 + 7;
 
-int const N = 1000 + 20;
-int n, k, a[N], dp[N], ans;
-bool mark[N][N];
-
-int main()
+void solve()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    cout.tie(0);
+    int n, k;
     cin >> n >> k;
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < n; j++)
-            mark[i][j] = 1;
+    vector<int> a(n), dp(n, 0);
+    vector<vector<bool>> mark(n, vector<bool>(n, 1));
     for (int i = 0; i < k; i++)
     {
         for (int j = 0; j < n; j++)
@@ -28,6 +25,7 @@ int main()
         }
     }
 
+    int ans = 0;
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < i; j++)
@@ -37,4 +35,12 @@ int main()
     }
 
     cout << ans << '\n';
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr), cout.tie(nullptr);
+
+    solve();
 }
