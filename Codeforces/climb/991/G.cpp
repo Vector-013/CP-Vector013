@@ -25,7 +25,7 @@ void solve()
 
     auto dfs = [&](auto &self, int u, int p) -> void
     {
-        dp1[u] += g[u].size();
+        dp1[u] = g[u].size();
         ll maxi1 = -linf, maxi2 = -linf;
         for (int v : g[u])
         {
@@ -38,7 +38,7 @@ void solve()
                 swap(maxi1, maxi2);
         }
         dp2[u] = dp1[u];
-        if (g[u].size() > 2)
+        if ((g[u].size() > 2) || (p == -1 && g[u].size() > 1))
         {
             dp2[u] = max(dp2[u], maxi1 + maxi2 + (ll)g[u].size() - 4ll);
         }
