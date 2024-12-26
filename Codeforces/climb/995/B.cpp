@@ -7,16 +7,30 @@ typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
 const int mod = 1e9 + 7;
-auto mex = [](set<int> &s) -> int
-{
-    int mex = 0;
-    while (s.count(mex))
-        mex++;
-    return mex;
-};
 
 void solve()
 {
+    ll n, a, b, c;
+    cin >> n >> a >> b >> c;
+    ll ans = 3 * (n / (a + b + c));
+    ll d = (a + b + c) * (n / (a + b + c));
+    vector<ll> v = {a, b, c};
+    if (d >= n)
+    {
+        cout << ans << '\n';
+        return;
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        if (d + v[i] >= n)
+        {
+            cout << ans + 1 << '\n';
+            return;
+        }
+        ans++;
+        d += v[i];
+    }
+    cout << ans << '\n';
 }
 
 int main()

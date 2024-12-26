@@ -7,31 +7,28 @@ typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
 const int mod = 1e9 + 7;
+map<ll, ll> dp;
+
+ll maxcn(ll n)
+{
+    if (n <= 3)
+    {
+        return 1;
+    }
+    if (dp[n])
+    {
+        return dp[n];
+    }
+    ll s = n / 4;
+    dp[n] = maxcn(s) + maxcn(s);
+    return dp[n];
+}
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<int> a(n), b(n);
-
-    for (int i = 0; i < n; i++)
-    {
-        cin >> a[i];
-    }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> b[i];
-    }
-    int ans = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if (i + 1 < n && a[i] > b[i + 1])
-        {
-            ans += a[i] - b[i + 1];
-        }
-    }
-    ans += a[n - 1];
-    cout << ans << '\n';
+    ll x;
+    cin >> x;
+    cout << maxcn(x) << '\n';
 }
 
 int main()

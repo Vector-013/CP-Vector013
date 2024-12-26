@@ -10,28 +10,17 @@ const int mod = 1e9 + 7;
 
 void solve()
 {
-    int n;
-    cin >> n;
-    vector<int> a(n), b(n);
-
-    for (int i = 0; i < n; i++)
+    ll n, d;
+    cin >> n >> d;
+    vector<int> v, w;
+    v.push_back(1);
+    for (int i = 3; i < 10; i += 2)
     {
-        cin >> a[i];
+        if (d % i == 0)
+            v.push_back(i);
+        else
+            w.push_back(i);
     }
-    for (int i = 0; i < n; i++)
-    {
-        cin >> b[i];
-    }
-    int ans = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if (i + 1 < n && a[i] > b[i + 1])
-        {
-            ans += a[i] - b[i + 1];
-        }
-    }
-    ans += a[n - 1];
-    cout << ans << '\n';
 }
 
 int main()
