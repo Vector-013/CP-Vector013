@@ -14,7 +14,55 @@ auto mex = [](set<int> &s) -> int
         mex++;
     return mex;
 };
+ll gcd(ll a, ll b)
+{
+    if (b == 0)
+        return a;
 
+    if (a == 0)
+        return b;
+
+    if (a > b)
+        return gcd(b, a % b);
+
+    return gcd(a, b % a);
+}
+
+ll maxi(ll a, ll b)
+{
+    if (a > b)
+        return a;
+
+    else
+        return b;
+}
+
+ll mini(ll a, ll b)
+{
+    if (a > b)
+        return b;
+
+    else
+        return a;
+}
+
+int modpower(ll a, ll b, ll c)
+{
+    ll r = 1;
+
+    a = a % c;
+
+    while (b > 0)
+    {
+        if (b % 2 == 1)
+            r = (r * a) % c;
+
+        b = b / 2;
+        a = (a * a) % c;
+    }
+
+    return r;
+}
 void solve()
 {
 }
