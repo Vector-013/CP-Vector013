@@ -6,43 +6,34 @@ typedef unsigned long long ull;
 typedef long double ld;
 const int inf = 2e9;
 const ll linf = 9e18;
-const int mod = 1e9 + 7;
 
 void solve()
 {
-    int n, p, k;
-    cin >> n >> p >> k;
+    int n, k;
+    cin >> n >> k;
     vector<int> a(n);
-    for (auto &x : a)
+    for (int &x : a)
         cin >> x;
     sort(a.begin(), a.end());
-    ll prf = 0;
-    ll ans = 0;
-
-    for (int i = 0; i < k; i++)
+    map<int, int> cnt;
+    map<int, int> vis;
+    for (auto x : a)
+        cnt[x]++;
+    int ans = 0;
+    for (int i = 0; i < n; i++)
     {
-        ll sum = prf;
-        if (sum > p)
-            break;
-        ll cnt = i;
-        for (int j = i + k - 1; j < n; j += k)
+        if (!vis[a[i]])
         {
-            if (sum + a[j] <= p)
-            {
-                cnt += k;
-                sum += a[j];
-            }
+            vis[a[i]] = 1;
+            vis[k - a[i]] = 1;
+            if (a[i] != k - a[i])
+                ans += min(cnt[a[i]], cnt[k - a[i]]);
             else
-            {
-                break;
-            }
+                ans += cnt[a[i]] / 2;
         }
-        prf += a[i];
-        ans = max(ans, cnt);
     }
     cout << ans << '\n';
 }
-
 int main()
 {
     ios_base::sync_with_stdio(false);
