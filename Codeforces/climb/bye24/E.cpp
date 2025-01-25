@@ -21,12 +21,17 @@ void solve()
         g[u].push_back(v);
         g[v].push_back(u);
     }
+    if (n == 2)
+    {
+        cout << "0\n";
+        return;
+    }
     for (int i = 0; i < n; i++)
     {
         if (g[i].size() == 1)
         {
             d[i] = 0;
-            d[g[i][0]] = min(d[g[i][0]], 1);
+            d[g[i][0]] = 1;
         }
     }
     ll ans = 0;
@@ -45,7 +50,9 @@ void solve()
             self(self, v, u);
             siz1[u] += siz1[v];
             siz2[u] += siz2[v];
-            if (d[v] == 1)
+            if (d[u] == 0)
+                ans += siz1[v] + siz2[v];
+            else if (d[v] == 1)
                 ans += siz2[v];
             if (d[v] == 0)
                 ans += cnt2 + cnt1;

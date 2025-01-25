@@ -62,56 +62,36 @@ void solve()
 {
     int n, m;
     cin >> n >> m;
-    vector<tuple<int, int, int>> edges;
+
+    vector<int> a(m), d(m), k(m), s(n, 0);
     for (int i = 0; i < m; i++)
     {
-        int u, v, w;
-        cin >> u >> v >> w;
-        u--, v--;
-        edges.emplace_back(w, u, v);
+        cin >> a[i] >> d[i] >> k[i];
+        a[i]--;
     }
-    sort(edges.begin(), edges.end(), greater<tuple<int, int, int>>());
+
     DSU dsu(n);
-    tuple<int, int, int> last;
-    vector<vector<int>> adj(n);
-    for (auto [w, u, v] : edges)
+    int ans = n;
+    for (int dd = 1; dd <= 10; ++dd)
     {
-        if (dsu.find(u) != dsu.find(v))
+        s.assign(n, 0);
+        for (int i = 0; i < m; i++)
         {
-            dsu.merge(u, v);
-            adj[u].push_back(v);
-            adj[v].push_back(u);
-        }
-        else
-            last = {w, u, v};
-    }
-    int start = get<1>(last), end = get<2>(last);
-    cout << get<0>(last) << ' ';
-    vector<int> path;
-    auto dfs = [&](auto &self, int u, int p, int e) -> void
-    {
-        if (u == e)
-        {
-            path.push_back(u);
-            return;
-        }
-        for (int v : adj[u])
-        {
-            if (v == p)
+            if (d[i] != dd)
                 continue;
-            self(self, v, u, e);
-            if (!path.empty())
-            {
-                path.push_back(u);
-                return;
-            }
+            s[a[i]]++;
+            s[a[i] + k[i] * dd]--;
         }
-    };
-    dfs(dfs, start, -1, end);
-    cout << path.size() << '\n';
-    for (int i = 0; i < path.size(); i++)
-        cout << path[i] + 1 << ' ';
-    cout << '\n';
+        for (int i = dd; i < n; i++)
+            s[i] += s[i - dd];
+
+        for (int i = 0; i < n; ++i)
+        {
+            if (s[i] > 0)
+                ans -= dsu.merge(i, i + dd);
+        }
+    }
+    cout << ans << '\n';
 }
 
 int main()
