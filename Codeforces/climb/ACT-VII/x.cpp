@@ -1,101 +1,93 @@
-#include <iostream>
-#include <vector>
-#include <cstdlib>
-#include <cmath>
+#include <bits/stdc++.h>
 using namespace std;
+typedef long long ll;
+using i64 = long long;
+typedef unsigned long long ull;
+typedef long double ld;
+const int inf = 2e9;
+const ll linf = 9e18;
+const int mod = 1e9 + 7;
+
+void solve()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n), d(n), c1, c2;
+    set<int> s;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> a[i];
+        c1.push_back(i);
+        s.insert(i);
+    }
+    for (int i = 0; i < n; i++)
+        cin >> d[i];
+
+    vector<int> status(n, 1);
+    int round = n;
+    while (c1.size())
+    {
+        c2.clear();
+        int cnt = 0;
+        for (int i = 0; i < c1.size(); i++)
+        {
+            int j = c1[i];
+            int x = 0;
+            auto it = s.find(j);
+            if (it != s.begin())
+            {
+                x += a[*prev(s.find(j))];
+            }
+            if (it != s.end())
+            {
+                x += a[*next(s.find(j))];
+            }
+            if (d[j] < x)
+            {
+                cnt++;
+                status[j] = 0;
+            }
+        }
+        for (int i = 0; i < c1.size(); i++)
+        {
+            int j = c1[i];
+            if (status[j] == 0)
+            {
+                auto it = s.find(j);
+                if (it != s.begin() && status[*prev(it)] == 1)
+                {
+                    c2.push_back(*prev(it));
+                }
+                if (it != s.end() && status[*next(it)] == 1)
+                {
+                    c2.push_back(*next(it));
+                }
+            }
+        }
+        for (int i = 0; i < c1.size(); i++)
+        {
+            int j = c1[i];
+            if (status[j] == 0)
+            {
+                s.erase(j);
+                status[j] = -1;
+            }
+        }
+        cout << cnt << ' ';
+        round--;
+        c1 = c2;
+    }
+    while (round--)
+        cout << 0 << ' ';
+    cout << '\n';
+}
+
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr), cout.tie(nullptr);
     int t;
     cin >> t;
     while (t--)
-    {
-        int n;
-        if (!(cin >> n))
-            return 0;
-        std::vector<int> x(n + 1);
-        std::vector<bool> appear(n + 1, false);
-        for (int i = 1; i <= n; i++)
-        {
-            cin >> x[i];
-            if (x[i] >= 1 && x[i] <= n)
-                appear[x[i]] = true;
-        }
-        int
-            candidate = -1;
-        for (int v = 1; v <= n; v++)
-        {
-            if (!appear[v])
-            {
-                candidate = v;
-                break;
-            }
-        }
-        if (candidate != -1)
-        {
-            int other = (candidate == 1 ? 2 : 1);
-            cout << "? " << candidate << " " << other << "\n"
-                 << flush;
-            int response;
-            cin >> response;
-            if (response == -1)
-                return 0;
-            if (response == 0)
-                cout << "! A" << "\n"
-                     << flush;
-            else
-                cout << "! B"
-                     << "\n"
-                     << flush;
-        }
-        else
-        {
-            int i_min = 1, i_max = 1;
-            for (int i = 1; i <= n; i++)
-            {
-                if (x[i] < x[i_min])
-                    i_min = i;
-                if (x[i] > x[i_max])
-                    i_max =
-                        i;
-            }
-            int diff = abs(x[i_min] - x[i_max]);
-            cout << "? " << i_min << " "
-                 << i_max << "\n"
-                 << flush;
-            int r;
-            cin >> r;
-            if (r == -1)
-                return 0;
-            if (r < diff)
-            {
-                cout << "! A" << "\n"
-                     << flush;
-            }
-            else if (r > diff)
-            {
-                cout << "! B" << "\n"
-                     << flush;
-            }
-            else
-            {
-                cout << "? " << i_max << " " << i_min
-                     << "\n"
-                     << flush;
-                int r2;
-                cin >> r2;
-                if (r2 == -1)
-                    return 0;
-                if (r2 ==
-                    diff)
-                    cout << "! B" << "\n"
-                         << flush;
-                else
-                    cout << "! A" << "\n"
-                         << flush;
-            }
-        }
-    }
-    return 0;
+        solve();
 }
